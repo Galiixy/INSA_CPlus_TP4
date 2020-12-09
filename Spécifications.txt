@@ -1,0 +1,57 @@
+Une classe qui gère le flux de log mais qui soit réutilisable.
+heure, cible, ref
+
+classe fluxlog hérite istream, spécialisé par une fonction lirelog
+
+classe log
+
+Structure stats/graphe => représenter le graph avec plusieurs collection de la stl à adapter
+le main créé le fluxlog, créé la structure du graph, tant qu'on a pas atteint la fin du fichier selon les arguments on ajoute dans la structure... etc
+
+
+Spécifications :
+
+	* Entrée du programme
+
+		- fichier .txt ou .log (cas normal)
+
+		- fichier verrouillé (cas d'erreur)
+
+		- fichier vide : application silencieuse ou message d'erreur (cas d'erreur)
+
+		- Cas d'erreur : pas de fichier (cas d'erreur)
+
+	* Options du programme
+
+		Cas normaux :
+
+			- pas d'option
+				Soit n = nombre de documents consultés
+				+ Si n >= 10, affichage des 10 documents les plus consultés par ordre décroissant de popularité (cas normal)
+					Si égalité... 
+				+ Si 0 < n < 10, affichage des n documents les plus consultés par ordre décroissant de popularité (cas normal)
+				+ Si n = 0, aucun affichage (cas d'erreur)
+
+			- option [-g nomfichier.dot]
+				+ Si nomfichier.dot, création du fichier (cas normal)
+				+ Si le fichier existe déjà, message d'erreur (cas d'erreur)
+				+ Si pas de nom de fichier, message d'erreur + arrêt du programme (cas d'erreur)
+
+			- option [-e]
+				+ Exclusion des documents image, css, javascript (cas normal)
+				+ Si que des images, css, javascript (cas d'erreur)
+
+			- option [-t heure]
+				+ Si pas d'heure, message d'erreur + arrêt du programme (cas d'erreur)
+				+ Si heure :
+					si heure mauvaise, message d'erreur + arrêt du programme (cas d'erreur)
+					Sinon ne prendre en compte que le créneau horaire [heure, heure+1[ (cas normal)
+
+		Cas d'erreur :
+
+			- option non gérée, message d'erreur + arrêt du programme.
+
+Conception :
+
+	penser à nettoyer l'URL quand elle est locale, le programme doit avoir une info concernant l'URL de base
+	l'URL du serveur peut être un paramètre du programme.
