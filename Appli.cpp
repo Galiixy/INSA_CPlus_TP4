@@ -14,57 +14,59 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
+#include<stdio.h>
+#include<string.h>
+#include <map>
+
 #include "Appli.h"
 
+using namespace std;
+
+
+
 //------------------------------------------------------------- Constantes
+const int nbOptions = 4; 
+map <string, string> tabOption; // dans l'ordre sans option, -e, -t, -g
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-Appli& Appli::operator = ( const Appli& unAppli)
+ int main (int argc, char* argv[])
 // Algorithme :
-//
 {
-} //----- Fin de operator =
+     int cpt;
+     string nomFichier;
 
+     if (argc == 0) {
+         cout << "Aucun parametres, veuillez rentrer un nom de fichier au minimum"<<endl;
+         cout << "Pour les options : " << endl << " 1 - '-e', '-g nomfichier.dot', '-t heure' " << endl;;
+     }
+     for (cpt = 1; cpt < argc; cpt++) {
+         if (cpt + 1 == argc) { 
+             //le dernier parametre est toujours 
+             // le nom du fichier
+             nomFichier = argv[cpt];
+         }
+         else if (strcmp(argv[cpt], "-e")) {
+             tabOption["e"];
+         }
+         else if (strcmp(argv[cpt], "-t")) {
+             tabOption["t"];
+         }
+         else if (strcmp(argv[cpt], "-g")) {
+             tabOption["g"];
+         }
+         else if (strcmp(argv[cpt - 1], "-t")) {
+             tabOption["t"] = argv[cpt];
+         }
+         else if (strcmp(argv[cpt - 1], "-g")) {
+             tabOption["g"] = argv[cpt];
+         }
+     }
+     
 
-//-------------------------------------------- Constructeurs - destructeur
-Appli::Appli( const Appli& unAppli)
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Appli>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
-
-
-Appli::Appli( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Appli>" << endl;
-#endif
-} //----- Fin de Xxx
-
-
-Appli::~Appli( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Appli>" << endl;
-#endif
-} //----- Fin de ~Appli
+} //----- Fin de Méthode
 
 
 //------------------------------------------------------------------ PRIVE
