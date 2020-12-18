@@ -2,7 +2,7 @@
                            Log  -  description
                              -------------------
     début                : 02/12/2020
-    copyright            : (C) 2020 par Emannuel et Gaelle
+    copyright            : (C) 2020 par Emmanuel et Gaelle
 *************************************************************************/
 
 //---------- Interface de la classe <Log> (fichier Log.h) ----------------
@@ -10,6 +10,7 @@
 #define LOG_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <string>
 
 //------------------------------------------------------------- Constantes
 
@@ -27,7 +28,25 @@ class Log
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    void Afficher ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    string GetDocumentCible ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    string GetDocumentReferenceur ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    string GetTypeDocumentCible ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -36,27 +55,40 @@ public:
 
 //------------------------------------------------- Surcharge d'opérateurs
     Log & operator = ( const Log & unLog);
-    // Mode d'emploi :
+    // Mode d'emploi : Surcharge de l'opérateur d'affectation.
     //
     // Contrat :
     //
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Log( const Log & unLog);
-    // Mode d'emploi (constructeur de copie) :
+    Log(const Log & unLog);
+    // Mode d'emploi : Constructeur de copie de la classe.
     //
     // Contrat :
     //
 
     Log( );
-    // Mode d'emploi :
+    // Mode d'emploi : Constructeur vide de la classe.
     //
     // Contrat :
     //
 
-    virtual ~Log( );
-    // Mode d'emploi :
+    Log(string cible, string referenceur);
+    // Mode d'emploi : Constructeur vide de la classe.
+    //
+    // Contrat :
+    //
+
+    Log(string ip, string date, string requete, int status, long int tailleReponse,
+        string referenceur, string idClientNav);
+    // Mode d'emploi : Constructeur surchargé de la classe.
+    //
+    // Contrat :
+    //
+
+    virtual ~Log();
+    // Mode d'emploi : Destructeur de la classe.
     //
     // Contrat :
     //
@@ -67,10 +99,16 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+    string ip;
+    string date;
+    string requete;
+    int status;
+    long int tailleReponse;
+    string referenceur;
+    string idClientNav;
 
 };
 
 //-------------------------------- Autres définitions dépendantes de <Log>
 
 #endif // LOG_H
-
