@@ -13,24 +13,47 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <string.h>
 
 //------------------------------------------------------ Include personnel
 #include "Flux.h"
+
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+Log Flux::LireFlux ()
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+	if(monFlux){
+		string ligne; 
+		getline(f_in, ligne);
 
+		stringstream ss(ligne);
+		string caractere;
+
+		while(ss.get(caractere)){
+			cout << caractere;
+		}
+	}
+	cout <<endl;
+
+	return null;
+}//----- Fin de LireFlux
+
+bool Flux::FinFichier()
+// Algorithme :
+//
+{
+
+
+}//----- Fin de LireFlux
 
 //------------------------------------------------- Surcharge d'opérateurs
-Flux & Flux::operator = ( const Flux & unFlux)
+Flux & Flux::operator <<( const Flux & unFlux)
 // Algorithme :
 //
 {
@@ -38,34 +61,24 @@ Flux & Flux::operator = ( const Flux & unFlux)
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Flux::Flux( const Flux & unFlux)
+Flux::Flux(string P_nomFichier, ifstream P_in)
 // Algorithme :
-//
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Flux>" << endl;
-#endif
-} //----- Fin de Flux (constructeur de copie)
+	#ifdef MAP
+	    cout << "Appel au constructeur parametres de <Flux>" << endl;
+	#endif
+	nomFichier = P_nomFichier;
+	ifstream monFlux(P_nomFichier);
+	f_in = monFlux;
 
+	if(monFlux){
+		cout <<"Ouverture du fichier";
+	}
+	else 
+		cerr <<"Impossible d'ouvrir le fichier"<<endl;
 
-Flux::Flux( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Flux>" << endl;
-#endif
+	
 } //----- Fin de Flux
-
-
-Flux::~Flux( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Flux>" << endl;
-#endif
-} //----- Fin de ~Flux
 
 
 //------------------------------------------------------------------ PRIVE

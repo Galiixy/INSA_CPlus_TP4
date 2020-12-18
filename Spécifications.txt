@@ -53,5 +53,8 @@ Spécifications :
 
 Conception :
 
-	penser à nettoyer l'URL quand elle est locale, le programme doit avoir une info concernant l'URL de base
-	l'URL du serveur peut être un paramètre du programme.
+	
+	Lors de la création d'une instance log :
+		- nettoyer le référenceur de sorte à ce qu'il ne contienne pas l'addresse du serveur quand c'est une URL locale. 
+		(penser à nettoyer l'URL quand elle est locale, le programme doit avoir une info concernant l'URL de base
+		l'URL du serveur peut être un paramètre du programme.)

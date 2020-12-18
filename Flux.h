@@ -11,7 +11,9 @@
 #define FLUX_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
+#include <string>
+#include "Log.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -28,15 +30,19 @@ class Flux
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    Log LireFlux ();
     // Mode d'emploi :
-    //
+    //  Retourne un objet log d'une ligne complete
     // Contrat :
-    //
+    // A condition que ca ne soit pas la fin du fichier
+
+    bool FinFichier();
+    // Mode d'emploi : 
+    // Retourne vrai si c'est la fin du fichier
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Flux & operator = ( const Flux & unFlux);
+    Flux & operator << ( const Flux & unFlux);
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,13 +50,8 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Flux ( const Flux & unFlux);
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
-    Flux ( );
+    Flux (string P_nomFichier, ifstream P_in);
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,7 +69,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    string nomFichier;
+    ifstream f_in;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
