@@ -97,6 +97,7 @@ CollectionLog::CollectionLog( )
 #ifdef MAP
     cout << "Appel au constructeur de <CollectionLog>" << endl;
 #endif
+    
 } //----- Fin de CollectionLog
 
 

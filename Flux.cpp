@@ -77,7 +77,7 @@ Log Flux::readLog ()
 
 	getNextElement(ligne, separateur);
 	idClientNav = getNextElement(ligne,separateur);
-
+	cout <<ip<<date<<requete<<status<<tailleReponse<<referenceur<<idClientNav<<endl;
 	return Log(ip,date,requete,status,tailleReponse,referenceur,idClientNav);
 }//----- Fin de LireFlux
 

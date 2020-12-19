@@ -52,6 +52,17 @@ public:
     // Contrat :
     //
 
+    string GetHeure( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    string GetExtension ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------- Surcharge d'opérateurs
     Log & operator = ( const Log & unLog);

@@ -27,7 +27,6 @@ string Log::GetDocumentCible ( )
 // Algorithme :
 //
 {
-	
 	string vecteur;
 	stringstream ss(requete);
 	getline(ss,vecteur,'/');
@@ -55,6 +54,38 @@ string Log::GetTypeDocumentCible ( )
 	getline(ss,vecteur,'.');
 	getline(ss,vecteur,' ');
 	return vecteur;
+} //----- Fin de GetTypeDocumentArrivee
+
+string Log::GetHeure( )
+// Algorithme :
+//
+{
+	string extension;
+	extension = date;
+
+	int position = extension.find(":"); //position separateur
+	extension = extension.substr(position+1); //raccourci le debut
+
+	position = extension.find(":"); //position separateur
+	extension = extension.substr(0,position); // raccourci la fin
+
+	return extension;
+} //----- Fin de GetTypeDocumentArrivee
+
+string Log::GetExtension ( )
+// Algorithme :
+//
+{	
+	string extension;
+	extension = requete;
+
+	int position = extension.find("."); //position separateur
+	extension = extension.substr(position+1); //raccourci le debut
+
+	position = extension.find(" "); //position separateur
+	extension = extension.substr(0,position); // raccourci la fin
+
+	return extension;
 } //----- Fin de GetTypeDocumentArrivee
 
 
