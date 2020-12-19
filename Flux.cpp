@@ -13,6 +13,8 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
+
 #include <string.h>
 
 //------------------------------------------------------ Include personnel
@@ -24,44 +26,67 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-Log Flux::LireFlux ()
-// Algorithme :
-//
-{
-	if(monFlux){
-		string ligne; 
-		getline(f_in, ligne);
-
-		stringstream ss(ligne);
-		string caractere;
-
-		while(ss.get(caractere)){
-			cout << caractere;
+bool Flux::isEndFile(){
+	if(f_in){
+		if(f_in.eof()){
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
-	cout <<endl;
+	else{
+		return true;
+	}
+}
 
-	return null;
-}//----- Fin de LireFlux
-
-bool Flux::FinFichier()
+Log Flux::readLog ()
 // Algorithme :
 //
 {
+	/* variables */ 
+	string ip;
+	string date;
+	string requete;
+	int status =0;
+	long int tailleReponse =0;
+	string referenceur;
+	string idClientNav;
+	string separateur(1,'"');
 
+	/* Recuperation de la ligne */
+	string ligne; 
+	getline(f_in, ligne);
 
+	/* Recuperation des elements */
+	ip = getNextElement(ligne, " ");
+
+	getNextElement(ligne, "[");
+	date = getNextElement(ligne, "]");
+
+	getNextElement(ligne, separateur);
+	requete = getNextElement(ligne,separateur);
+
+	getNextElement(ligne, " ");
+	status = stoi(getNextElement(ligne," "));
+
+	tailleReponse = stoi(getNextElement(ligne," "));
+
+	getNextElement(ligne, separateur);
+	referenceur = getNextElement(ligne,separateur);
+
+	getNextElement(ligne, separateur);
+	idClientNav = getNextElement(ligne,separateur);
+
+	return Log(ip,date,requete,status,tailleReponse,referenceur,idClientNav);
 }//----- Fin de LireFlux
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-Flux & Flux::operator <<( const Flux & unFlux)
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Flux::Flux(string P_nomFichier, ifstream P_in)
+Flux::Flux(string P_nomFichier)
 // Algorithme :
 {
 	#ifdef MAP
@@ -69,18 +94,30 @@ Flux::Flux(string P_nomFichier, ifstream P_in)
 	#endif
 	nomFichier = P_nomFichier;
 	ifstream monFlux(P_nomFichier);
-	f_in = monFlux;
+	f_in.open(P_nomFichier);
 
 	if(monFlux){
-		cout <<"Ouverture du fichier";
+		cout <<"Ouverture du fichier"<<endl;
 	}
 	else 
 		cerr <<"Impossible d'ouvrir le fichier"<<endl;
-
-	
 } //----- Fin de Flux
 
+Flux::~Flux ( ){
+
+}
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+string Flux::getNextElement(string & ligne,string separateur)
+// Algorithme :
+// retourne le prochain element jusquau separateur
+// raccourci la ligne a partir du separateur jusqu'a la fin
+{
+	int position = ligne.find(separateur); //position separateur
+	string element = ligne.substr(0,position); // element to return
+	ligne = ligne.substr(position+1); //raccourci jusqua fin
+
+	return element;
+}//----- Fin de getNextElement

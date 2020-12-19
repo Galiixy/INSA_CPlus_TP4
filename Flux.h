@@ -11,7 +11,9 @@
 #define FLUX_H
 
 //--------------------------------------------------- Interfaces utilisées
+using namespace std;
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "Log.h"
 //------------------------------------------------------------- Constantes
@@ -30,28 +32,23 @@ class Flux
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    Log LireFlux ();
+    Log readLog ();
     // Mode d'emploi :
-    //  Retourne un objet log d'une ligne complete
+    // Retourne un objet log d'une ligne complete
     // Contrat :
     // A condition que ca ne soit pas la fin du fichier
 
-    bool FinFichier();
+    bool isEndFile();
     // Mode d'emploi : 
-    // Retourne vrai si c'est la fin du fichier
+    // Retourne vrai si fin du fichier ou fichier impossible a lire
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Flux & operator << ( const Flux & unFlux);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 
 //-------------------------------------------- Constructeurs - destructeur
-
-    Flux (string P_nomFichier, ifstream P_in);
+     
+    Flux (const string P_nomFichier);
     // Mode d'emploi :
     //
     // Contrat :
@@ -67,6 +64,9 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+    string getNextElement( string & ligne,string separateur);
+    // Mode d'emploi :
+    // Retourne le prochain element de la ligne avant le separateur
 
 //----------------------------------------------------- Attributs protégés
     string nomFichier;
