@@ -103,12 +103,12 @@ bool valideOption(Log &log){
         Log log = monFlux.readLog();
 
         if(valideOption(log)){
-            cout << "ajout LOG "<<log.GetDocumentCible()<< " vers "<< log.GetDocumentReferenceur() << endl;
+            cout << "ajout LOG "<<log.GetDocumentCible()<< " depuis "<< log.GetDocumentReferenceur() << endl;
             cout <<"Date : " <<log.GetHeure()<< " Extension : "<<log.GetExtension()<<endl;
             collec->Ajouter(log.GetDocumentCible(), log.GetDocumentReferenceur());
         }
     }
-    //collec->AfficherDecroissant();
+    collec->AfficherDecroissant();
     delete collec;
     return 0;
 } //----- Fin de Méthode
