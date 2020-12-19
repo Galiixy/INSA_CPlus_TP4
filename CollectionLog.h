@@ -42,8 +42,12 @@ public:
 	//				   le bon fonctionnement de la classe.
 	
 	void AfficherDecroissant();
-	// Mode d'emploi :
-	//
+	// Mode d'emploi : permet d'afficher les 10 documents les plus consultés
+	//                 dans l'ordre décroissant.
+
+    void ConceptionDot();
+    // Mode d'emploi : permet de concevoir le fichier .dot décrivant
+    //                 le graphe de parcours.
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -108,6 +108,7 @@ bool valideOption(Log &log){
             collec->Ajouter(log.GetDocumentCible(), log.GetDocumentReferenceur());
         }
     }
+    //collec->AfficherDecroissant();
     delete collec;
     return 0;
 } //----- Fin de Méthode

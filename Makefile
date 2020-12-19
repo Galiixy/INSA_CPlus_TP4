@@ -9,7 +9,7 @@ CCFLAGS=-ansi -pedantic -Wall -std=c++11
 prog : Appli.o CollectionLog.o Flux.o Log.o
 	g++ -o prog Appli.o CollectionLog.o Flux.o Log.o
 
-Application.o : Appli.cpp
+Appli.o : Appli.cpp
 	g++ -c Appli.cpp -o Appli.o $(CCFLAGS)
 
 CollectionLog.o : CollectionLog.cpp CollectionLog.h
@@ -30,6 +30,7 @@ mrproper: clean
 valgrind: prog
 	valgrind --leak-check=full ./prog
 
-run: prog
-	./prog
+run : prog
+	./prog "ex.txt"
+#./prog $(ARGS)
 
