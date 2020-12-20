@@ -54,6 +54,7 @@ bool valideOption(Log &log){
  int main (int argc, char* argv[])
 // Algorithme :
 {
+    string url = "http://intranet-if.insa-lyon.fr";
     int cpt;
     string nomFichier;
 
