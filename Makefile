@@ -7,7 +7,7 @@ CCFLAGS=-ansi -pedantic -Wall -std=c++11
 #CCFLAGS=-DMAP -ansi -pedantic -Wall -std=c++11
 
 analog : Appli.o CollectionLog.o Flux.o Log.o
-	g++ -o prog Appli.o CollectionLog.o Flux.o Log.o
+	g++ -o analog Appli.o CollectionLog.o Flux.o Log.o
 
 Appli.o : Appli.cpp
 	g++ -c Appli.cpp -o Appli.o $(CCFLAGS)
@@ -25,7 +25,7 @@ clean:
 	rm -rf *.o
 
 mrproper: clean
-	rm -rf prog
+	rm -rf analog
 
 valgrind: analog
 	valgrind --leak-check=full ./analog
