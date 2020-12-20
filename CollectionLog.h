@@ -45,7 +45,7 @@ public:
 	// Mode d'emploi : permet d'afficher les 10 documents les plus consultés
 	//                 dans l'ordre décroissant.
 
-    void ConceptionDot();
+    void ConceptionDot(string nomFichier);
     // Mode d'emploi : permet de concevoir le fichier .dot décrivant
     //                 le graphe de parcours.
 

@@ -6,7 +6,7 @@ CCFLAGS=-ansi -pedantic -Wall -std=c++11
 
 #CCFLAGS=-DMAP -ansi -pedantic -Wall -std=c++11
 
-prog : Appli.o CollectionLog.o Flux.o Log.o
+analog : Appli.o CollectionLog.o Flux.o Log.o
 	g++ -o prog Appli.o CollectionLog.o Flux.o Log.o
 
 Appli.o : Appli.cpp
@@ -27,10 +27,10 @@ clean:
 mrproper: clean
 	rm -rf prog
 
-valgrind: prog
-	valgrind --leak-check=full ./prog
+valgrind: analog
+	valgrind --leak-check=full ./analog
 
-run : prog
-	./prog "ex.txt"
-#./prog $(ARGS)
+run : analog
+	./analog "ex.txt"
+	#./analog $(ARGS)
 

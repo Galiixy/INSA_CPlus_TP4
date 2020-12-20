@@ -40,7 +40,9 @@ string Log::GetDocumentReferenceur( )
 {
 	string vecteur;
 	stringstream ss(referenceur);
-	getline(ss,vecteur,' ');
+	getline(ss,vecteur,'/');
+	getline(ss,vecteur,'/');
+	getline(ss,vecteur,'/');
 	getline(ss,vecteur,' ');
 	return vecteur;
 } //----- Fin de GetDocumentDepart

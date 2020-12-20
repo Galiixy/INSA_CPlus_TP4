@@ -13,6 +13,7 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
 
 //------------------------------------------------------ Include personnel
 #include "CollectionLog.h"
@@ -84,6 +85,57 @@ void CollectionLog::AfficherDecroissant(){
 		cout << cible_max << " (" << max << " hits)" << endl;
 		collection.erase(cible_max);
 	}
+}
+
+void CollectionLog::ConceptionDot(string nomFichier){
+    ifstream verification(nomFichier);
+    // On vérifie si le fichier existe déjà.
+    if (verification){
+        cout << "ERREUR : Le fichier existe déjà." << endl;
+        verification.close();
+    }
+    else{
+        ofstream flux (nomFichier.c_str(), ios::app);
+        if (!flux){
+            cout << "ERREUR : Impossible d'ouvrir le fichier" << endl; // Si problème de droit ou espace disque saturé.
+            flux.close();
+        }
+        else if (collection.size() == 0){
+            cout << "Le graphe est vide." << endl;
+            flux.close();
+        }
+        else{
+            int cpt = 0;
+            unordered_map<string, int> documents; // permet de stocker les documents déjà inscrit dans le fichier.
+            unordered_map<string, pair<unordered_map<string,int>,int>>::iterator it1;
+            unordered_map<string,int>::iterator it2;
+
+            flux << "digraph {" << endl;
+            // On commence par ajouter les noeuds pour chaque document cible et référenceur.
+            for (it1 = collection.begin(); it1 != collection.end(); it1++){ // On parcourt les cibles.
+                if (documents.count(it1->first)==0){ // On vérifie que le document n'a pas déjà été inscrit dans le fichier.
+                    flux << "node" << cpt << "[label=\"" << it1->first << "\"];" << endl; // on créé le noeud pour le document cible.
+                    documents[it1->first] = cpt; // on ajoute le document cible à la liste des documents inscrit dans le fichier.
+                    cpt++;
+                }
+                for (it2 = it1->second.first.begin(); it2 != it1->second.first.end(); it2++){ // On parcourt les référenceurs de la cible.
+                    if (documents.count(it2->first)==0){ // On vérifie que le référenceur n'a pas déjà été inscrit dans le fichier.
+                        flux << "node" << cpt << "[label=\"" << it2->first << "\"];" << endl; // on créé le noeud pour le référenceur.
+                        documents[it2->first] = cpt; // on ajoute le référenceur à la liste des documents inscrit dans le fichier. On lui attribue son numéro de noeud.
+                        cpt++;
+                    }
+                }
+            }
+            // On ajoute les arcs entre chaque document cible et référenceurs.
+            for (it1 = collection.begin(); it1 != collection.end(); it1++){ // On parcourt les cibles.
+                for (it2 = it1->second.first.begin(); it2 != it1->second.first.end(); it2++){ // On parcourt les référenceurs de la cible.
+                    flux << "node" << documents[it2->first] << " -> " << "node" << documents[it1->first] << " [label=\"" << it2->second << "\"];" << endl;
+                }
+            }
+            flux << "}";;
+            flux.close();
+        }
+    }
 }
 
 //------------------------------------------------- Surcharge d'opérateurs

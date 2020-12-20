@@ -96,11 +96,9 @@ Flux::Flux(string P_nomFichier)
 	ifstream monFlux(P_nomFichier);
 	f_in.open(P_nomFichier);
 
-	if(monFlux){
-		cout <<"Ouverture du fichier"<<endl;
-	}
-	else 
+	if(!monFlux){
 		cerr <<"Impossible d'ouvrir le fichier"<<endl;
+	}
 } //----- Fin de Flux
 
 Flux::~Flux ( ){
